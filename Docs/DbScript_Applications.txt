@@ -1,0 +1,43 @@
+/****** Object:  Table [dbo].[Applications]    Script Date: 30/06/2020 5:42:56 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Applications](
+	[ApplicationId] [int] IDENTITY(1,1) NOT NULL,
+	[CountryId] [int] NOT NULL,
+	[State] [varchar](50) NULL,
+	[PostcodeId] [int] NULL,
+	[FullName] [varchar](120) NOT NULL,
+	[CreatedDate] [datetime] NULL,
+ CONSTRAINT [PK_Applications] PRIMARY KEY CLUSTERED 
+(
+	[ApplicationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Applications]  WITH NOCHECK ADD  CONSTRAINT [FK_Applications_Country] FOREIGN KEY([CountryId])
+REFERENCES [dbo].[Country] ([CountryId])
+GO
+
+ALTER TABLE [dbo].[Applications] CHECK CONSTRAINT [FK_Applications_Country]
+GO
+
+ALTER TABLE [dbo].[Applications]  WITH NOCHECK ADD  CONSTRAINT [FK_Applications_Postcodes] FOREIGN KEY([PostcodeId])
+REFERENCES [dbo].[Postcodes] ([ID])
+GO
+
+ALTER TABLE [dbo].[Applications] NOCHECK CONSTRAINT [FK_Applications_Postcodes]
+GO
+
+
